@@ -103,7 +103,7 @@ public class UserRegistation extends javax.swing.JFrame {
         });
 
         jButtonSaveCust2.setBackground(new java.awt.Color(0, 204, 102));
-        jButtonSaveCust2.setText("Save");
+        jButtonSaveCust2.setText("Register");
         jButtonSaveCust2.setPreferredSize(new java.awt.Dimension(55, 25));
         jButtonSaveCust2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -267,14 +267,10 @@ public class UserRegistation extends javax.swing.JFrame {
                                 Logger.getLogger(UserRegistation.class.getName()).log(Level.SEVERE, null, ex);
                             }
 
-                            JOptionPane.showMessageDialog(null, "Registration is successfull.", "Customer Registration", JOptionPane.INFORMATION_MESSAGE);
+                            JOptionPane.showMessageDialog(null, "Registration information stored.Application will Restart.", "Customer Registration", JOptionPane.INFORMATION_MESSAGE);
+                            
                             dispose();
-                            java.awt.EventQueue.invokeLater(new Runnable() {
-                                @Override
-                                public void run() {
-                                    new MainForm().setVisible(true);
-                                }
-                            });
+                                                        
                             try {
                                 custcon.close();
                             } catch (SQLException ex) {
@@ -287,12 +283,13 @@ public class UserRegistation extends javax.swing.JFrame {
 
     private void jButtonCancelCustActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelCustActionPerformed
         dispose();        
-        java.awt.EventQueue.invokeLater(new Runnable() {
+      /*  java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new MainForm().setVisible(true);
+                new Home16().setVisible(true);
             }
-        });
+        });*/
+      System.exit(0);
     }//GEN-LAST:event_jButtonCancelCustActionPerformed
 
     private void jPanel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseClicked
@@ -300,13 +297,7 @@ public class UserRegistation extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel2MouseClicked
 
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
-        dispose();        // TODO add your handling code here:
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new MainForm().setVisible(true);
-            }
-        });        // TODO add your handling code here:
+      System.exit(0);       // TODO add your handling code here:
     }//GEN-LAST:event_jLabel6MouseClicked
 
     public static void main(String args[]) {
