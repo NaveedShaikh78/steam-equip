@@ -5,8 +5,13 @@
  */
 package examples.com.intelligt.modbus.examples;
 
+import com.sun.jndi.toolkit.url.Uri;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -240,8 +245,40 @@ public class Home16 extends javax.swing.JFrame {
 
     }//GEN-LAST:event_pnl_chartMouseDragged
 
+    // This will reference one line at a time
+    private String getLicense() {
+        String line = null;
+        String result = null;
+        try {
+
+            String path = getClass().getProtectionDomain().getCodeSource().getLocation().toString();
+            path ="c:/Teledyne/license.txt";
+
+            // FileReader reads text files in the default encoding.
+            FileReader fileReader
+                    = new FileReader(path);
+
+            // Always wrap FileReader in BufferedReader.
+            BufferedReader bufferedReader
+                    = new BufferedReader(fileReader);
+
+            while ((line = bufferedReader.readLine()) != null) {
+                System.out.println(line);
+                result = line;
+            }
+
+            // Always close files.
+            bufferedReader.close();
+        } catch (FileNotFoundException ex) {
+            System.out.println("Unable to open file '");
+        } catch (IOException ex) {
+            System.out.println("Error reading file '");
+            // Or we could just do this: 
+            // ex.printStackTrace();
+        }
+        return result;
+    }
     private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed
-       
 
         String MacId = LicenseKey.getMacID();
         System.out.println("MacId=" + MacId);
@@ -251,8 +288,8 @@ public class Home16 extends javax.swing.JFrame {
         System.out.println("Chavi_for_Soft=");
         System.out.println(Chavi_for_Soft);
         System.out.println("RGFuaXNoW0JAMWI3ZGE0ZA==");
-
-        if (KeyMain.decrypt(Chavi_for_Soft).equals(MacId)) {
+        String license = getLicense();
+        if (license.equals(Chavi_for_Soft)) {
             dispose();
             java.awt.EventQueue.invokeLater(new Runnable() {
                 @Override
@@ -261,12 +298,10 @@ public class Home16 extends javax.swing.JFrame {
                 }
             });
         } else {
-            JOptionPane.showMessageDialog(null, "Invalid Key", "License Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Invalid Key for MAC ID ["+MacId+"]", "License Error", JOptionPane.ERROR_MESSAGE);
             dispose();
             System.exit(0);
-
         }
-
     }//GEN-LAST:event_jLabel1MousePressed
 
     private void lbl_north1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_north1MousePressed

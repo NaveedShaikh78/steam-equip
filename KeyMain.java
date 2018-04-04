@@ -30,11 +30,11 @@ public class KeyMain {
 
         BASE64Encoder encoder = new BASE64Encoder();
 
-        byte[] salt = new byte[8];
-        String mysalt = "Danish12";
-        salt = mysalt.getBytes();
-
-        return encoder.encode(salt) + encoder.encode(str.getBytes());
+        String saltedMacIp = "Danish12" + str;
+        byte[]  input = saltedMacIp.getBytes();
+        
+        String result = encoder.encode(input); 
+        return result;
     }
 
     public static String decrypt(String encstr) {
@@ -49,6 +49,7 @@ public class KeyMain {
 
                 return new String(decoder.decodeBuffer(cipher));
 
+                
             } catch (IOException e) {
 
             }
