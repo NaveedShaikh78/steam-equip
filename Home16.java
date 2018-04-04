@@ -7,6 +7,13 @@ package examples.com.intelligt.modbus.examples;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Window;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -18,6 +25,7 @@ import org.jfree.data.general.DatasetUtilities;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
+import org.jfree.ui.RefineryUtilities;
 
 /**
  *
@@ -30,6 +38,7 @@ public class Home16 extends javax.swing.JFrame {
      */
     public Home16() {
         initComponents();
+
     }
 
     /**
@@ -59,6 +68,11 @@ public class Home16 extends javax.swing.JFrame {
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 formMouseClicked(evt);
+            }
+        });
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
             }
         });
 
@@ -226,6 +240,8 @@ public class Home16 extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        getAccessibleContext().setAccessibleName("frame2");
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -241,31 +257,88 @@ public class Home16 extends javax.swing.JFrame {
     }//GEN-LAST:event_pnl_chartMouseDragged
 
     private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed
-       
 
-        String MacId = LicenseKey.getMacID();
-        System.out.println("MacId=" + MacId);
+        Connection custcon = JdbcSQLiteConnection.createConnection();
+        Statement st = null;
+        ResultSet rs = null;
+        int regFlag = 0;
+        String q = "SELECT * from CustomerDetails";
+        try {
+            st = custcon.createStatement();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserRegistation.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
-        String Chavi_for_Soft = null;
-        Chavi_for_Soft = KeyMain.encrypt(MacId);
-        System.out.println("Chavi_for_Soft=");
-        System.out.println(Chavi_for_Soft);
-        System.out.println("RGFuaXNoW0JAMWI3ZGE0ZA==");
+        try {
+            rs = st.executeQuery(q);
+            regFlag = rs.getInt("registeredFlag");
+        } catch (SQLException ex) {
+            Logger.getLogger(UserRegistation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if (regFlag == 0) {
 
-        if (KeyMain.decrypt(Chavi_for_Soft).equals(MacId)) {
             dispose();
             java.awt.EventQueue.invokeLater(new Runnable() {
                 @Override
                 public void run() {
-                    new ActivatedScreen().setVisible(true);
+                    new UserRegistation().setVisible(true);
                 }
             });
         } else {
-            JOptionPane.showMessageDialog(null, "Invalid Key", "License Error", JOptionPane.ERROR_MESSAGE);
-            dispose();
-            System.exit(0);
+            String MacId = LicenseKey.getMacID();
+            System.out.println("MacId=" + MacId);
 
+            String Chavi_for_Soft = null;
+            try {
+                Chavi_for_Soft = rs.getString("LicKey");
+            } catch (SQLException ex) {
+                Logger.getLogger(Home16.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            System.out.println("Chavi_for_Soft=");
+            System.out.println(Chavi_for_Soft);
+            System.out.println("RGFuaXNoW0JAMWI3ZGE0ZA==");
+
+            if (KeyMain.decrypt(Chavi_for_Soft).equals(MacId)) {
+
+                try {
+                    st = custcon.createStatement();
+                } catch (SQLException ex) {
+                    Logger.getLogger(UserRegistation.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                try {
+                    boolean exr = st.execute("update CustomerDetails set registeredFlag = 1");
+                } catch (SQLException ex) {
+                    Logger.getLogger(UserRegistation.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                dispose();
+
+                java.awt.EventQueue.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        new ActivatedScreen().setVisible(true);
+                    }
+                });
+            } else {
+                JOptionPane.showMessageDialog(null, "Invalid Key", "License Error", JOptionPane.ERROR_MESSAGE);
+
+                dispose();
+                java.awt.EventQueue.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        new UserRegistation().setVisible(true);
+                    }
+                });
+
+            }
+            
         }
+        try {
+                custcon.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Home16.class.getName()).log(Level.SEVERE, null, ex);
+            }
 
     }//GEN-LAST:event_jLabel1MousePressed
 
@@ -307,6 +380,11 @@ public class Home16 extends javax.swing.JFrame {
         });
 
     }//GEN-LAST:event_formMouseClicked
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        //Window frame2 = null;
+        //   RefineryUtilities.centerFrameOnScreen(frame2);        // TODO add your handling code here:
+    }//GEN-LAST:event_formWindowActivated
 
     //Let's add a chart to top Jpanel
     //We are going to use JfreeCharts

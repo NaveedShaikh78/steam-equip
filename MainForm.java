@@ -147,6 +147,7 @@ public class MainForm extends javax.swing.JFrame {
         });
         jPanelSlaveConfig.add(jComboBoxCNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(368, 82, 123, -1));
 
+        jPanelChanel2.setBackground(new java.awt.Color(255, 255, 204));
         jPanelChanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Channel 2"));
         jPanelChanel2.setEnabled(false);
         jPanelChanel2.setMaximumSize(new java.awt.Dimension(220, 144));
@@ -206,6 +207,7 @@ public class MainForm extends javax.swing.JFrame {
 
         jPanelSlaveConfig.add(jPanelChanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(258, 114, -1, 136));
 
+        jPanelChanel1.setBackground(new java.awt.Color(255, 255, 204));
         jPanelChanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Channel 1"));
         jPanelChanel1.setMaximumSize(new java.awt.Dimension(220, 144));
         jPanelChanel1.setMinimumSize(new java.awt.Dimension(220, 144));

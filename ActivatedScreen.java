@@ -20,6 +20,7 @@ import com.intelligt.modbus.jlibmodbus.exception.ModbusIOException;
 import static examples.com.intelligt.modbus.examples.MainForm.addedDeviceCount;
 import static examples.com.intelligt.modbus.examples.MainForm.totaldev;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
 import java.io.File;
@@ -31,6 +32,7 @@ import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -318,7 +320,7 @@ public class ActivatedScreen extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Steam Industries Pvt. Ltd. - Modbus Software");
         setBackground(new java.awt.Color(204, 255, 204));
-        setMinimumSize(new java.awt.Dimension(1150, 540));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("\\icon\\TitleBarLogo.png")));
         setName("frameAct"); // NOI18N
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
@@ -346,11 +348,11 @@ public class ActivatedScreen extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Device Name", "Device Type", "Parameter", "Value", "Temperature"
+                "Device Name", "Device ID", "Device Type", "Parameter", "Value", "Temperature"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                true, true, false, false, false
+                true, false, true, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -389,7 +391,7 @@ public class ActivatedScreen extends javax.swing.JFrame {
         );
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/examples/com/intelligt/modbus/examples/Steam Logo with iso.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/examples/com/intelligt/modbus/examples/Icon/SteamLogo&Name_300x127.jpg"))); // NOI18N
         jLabel1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
         jPanel5.setBackground(new java.awt.Color(204, 255, 255));
@@ -403,7 +405,7 @@ public class ActivatedScreen extends javax.swing.JFrame {
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel14.setText("Relay");
 
-        jTableRelay.setBackground(new java.awt.Color(204, 255, 255));
+        jTableRelay.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jTableRelay.setFont(new java.awt.Font("Segoe UI Symbol", 1, 14)); // NOI18N
         jTableRelay.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -422,9 +424,14 @@ public class ActivatedScreen extends javax.swing.JFrame {
             }
         });
         jTableRelay.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
-        jTableRelay.setGridColor(new java.awt.Color(0, 0, 51));
+        jTableRelay.setFocusable(false);
+        jTableRelay.setGridColor(new java.awt.Color(102, 0, 204));
         jTableRelay.setOpaque(false);
         jTableRelay.setRowHeight(25);
+        jTableRelay.setRowMargin(8);
+        jTableRelay.setSelectionBackground(new java.awt.Color(255, 255, 255));
+        jTableRelay.setUpdateSelectionOnSort(false);
+        jTableRelay.setVerifyInputWhenFocusTarget(false);
         jScrollPane3.setViewportView(jTableRelay);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -448,7 +455,7 @@ public class ActivatedScreen extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 204));
+        jPanel1.setBackground(javax.swing.UIManager.getDefaults().getColor("InternalFrame.activeTitleGradient"));
         jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         cname.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -463,15 +470,19 @@ public class ActivatedScreen extends javax.swing.JFrame {
         ProName.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         ProName.setForeground(new java.awt.Color(0, 102, 102));
 
+        jLabel2.setBackground(new java.awt.Color(0, 51, 51));
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel2.setText("Customer Name:");
 
+        jLabel4.setBackground(new java.awt.Color(0, 51, 51));
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel4.setText("End User Name:");
 
+        jLabel5.setBackground(new java.awt.Color(0, 51, 51));
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel5.setText("Plant Name:");
 
+        jLabel7.setBackground(new java.awt.Color(0, 51, 51));
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel7.setText("Process:");
 
@@ -493,7 +504,7 @@ public class ActivatedScreen extends javax.swing.JFrame {
                     .addComponent(ProName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(cname, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 30, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -533,7 +544,7 @@ public class ActivatedScreen extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel8.setText("Device Logs");
 
-        jPanel2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, null, new java.awt.Color(204, 255, 204), null, null));
+        jPanel2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.green, new java.awt.Color(204, 255, 204), java.awt.Color.green, java.awt.Color.green));
 
         jButtonReports.setBackground(new java.awt.Color(255, 255, 255));
         jButtonReports.setForeground(new java.awt.Color(255, 255, 255));
@@ -612,12 +623,13 @@ public class ActivatedScreen extends javax.swing.JFrame {
         );
 
         jMenuBar1.setBackground(new java.awt.Color(204, 255, 204));
+        jMenuBar1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jMenuBar1.setForeground(new java.awt.Color(204, 255, 204));
+        jMenuBar1.setOpaque(false);
         jMenuBar1.setSelectionModel(null);
 
-        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/examples/com/intelligt/modbus/examples/Pnly Logo.png"))); // NOI18N
-        jMenu1.setText(".");
-        jMenu1.setToolTipText("");
+        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/examples/com/intelligt/modbus/examples/Icon/MenuLogo.png"))); // NOI18N
+        jMenu1.setToolTipText("Open Menu");
 
         jMenuItemAddDevice.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.ALT_MASK));
         jMenuItemAddDevice.setText("Add Device");
@@ -688,6 +700,10 @@ public class ActivatedScreen extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel8)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(10, 10, 10)
@@ -707,10 +723,6 @@ public class ActivatedScreen extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jScrollPane1)))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel8)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -735,7 +747,8 @@ public class ActivatedScreen extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-        public static String dev_name[] = new String[247];
+ public static String dev_name[] = new String[247];
+    public static int devID[] = new int[247];
     public static String devType[] = new String[247];
     public static String c1p1[] = new String[247];
     public static String c1u1[] = new String[247];
@@ -744,7 +757,7 @@ public class ActivatedScreen extends javax.swing.JFrame {
     public static float c1p1val[] = new float[247], c2p2val[] = new float[247], t1[] = new float[247], t2[] = new float[247];
     public static int R1[] = new int[247], R2[] = new int[247], R3[] = new int[247];
     public static int chanelCount[] = new int[20], totalrowsintable = 0;
-    public static int noofdev = 0,stopflag=0;
+    public static int noofdev = 0, stopflag = 0;
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
 
@@ -755,35 +768,52 @@ public class ActivatedScreen extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) jTableReading.getModel();
         jTableReading.setRowHeight(30);
         // model.setRowCount(0);
-        jTableReading = new JTable(model);
+        // jTableReading = new JTable(model);
 
         DefaultTableModel Relaymodel = (DefaultTableModel) jTableRelay.getModel();
         jTableRelay.setRowHeight(30);
-        // model.setRowCount(0);
-        jTableRelay = new JTable(Relaymodel);
 
-        MyCellRenderer mcr = new MyCellRenderer();
-for (int columnIndex = 0; columnIndex < jTableRelay.getColumnCount(); columnIndex ++) {
-            jTableRelay.getColumnModel().getColumn(columnIndex).setCellRenderer(new MyCellRenderer());
-        }
         for (int i = 1; i <= noofdev; i++) {
             if ("LXT-330 Dual Channel".equals(devType[i])) {
-                model.setValueAt(c1p1val[i] + " " + c1u1[i], i - 1, 3);
-                model.setValueAt(t1[i] + " ˚C", i - 1, 4);
-                model.setValueAt(c2p2val[i] + " " + c2u2[i], i, 3);
-                model.setValueAt(t2[i] + " ˚C", i, 4);
+                model.setValueAt(c1p1val[i] + " " + c1u1[i], i - 1, 4);
+                model.setValueAt(t1[i] + " ˚C", i - 1, 5);
+                model.setValueAt(c2p2val[i] + " " + c2u2[i], i, 4);
+                model.setValueAt(t2[i] + " ˚C", i, 5);
 
             } else {
-                model.setValueAt(c1p1val[i] + " " + c1u1[i], i - 1, 3);
-                model.setValueAt(t1[i] + " ˚C", i - 1, 4);
+                model.setValueAt(c1p1val[i] + " " + c1u1[i], i - 1, 4);
+                model.setValueAt(t1[i] + " ˚C", i - 1, 5);
             }
 
             Relaymodel.setValueAt(R1[i], i - 1, 0);
             Relaymodel.setValueAt(R2[i], i - 1, 1);
             Relaymodel.setValueAt(R3[i], i - 1, 2);
-  }
-       
 
+            jTableRelay.getColumnModel().getColumn(0).setCellRenderer(new CustomRenderer());
+            jTableRelay.getColumnModel().getColumn(1).setCellRenderer(new CustomRenderer());
+            jTableRelay.getColumnModel().getColumn(2).setCellRenderer(new CustomRenderer());
+        }
+
+    }
+
+    class CustomRenderer extends DefaultTableCellRenderer {
+
+        private static final long serialVersionUID = 6703872492730589499L;
+
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+            Component cellComponent = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+
+            if (table.getValueAt(row, column).toString().equals("1")) {
+                cellComponent.setBackground(Color.GREEN);
+            }
+            //if (table.getValueAt(row, column).toString().equals("1")) 
+            else
+            {
+                cellComponent.setBackground(Color.RED);
+            }
+
+            return cellComponent;
+        }
     }
 
     public class ReadThread extends Thread {
@@ -815,33 +845,36 @@ for (int columnIndex = 0; columnIndex < jTableRelay.getColumnCount(); columnInde
 
                 // for (int j = 1; j < 2; j++)//infinite
                 for (;;) {
-                    if(stopflag==1)
-                    {
-                      
+                    if (stopflag == 1) {
+
                         _portclose();
-                        stopflag=0;
+                        stopflag = 0;
                         break;
-                    
+
                     }
-                    
-                        
+
                     try {
                         Thread.sleep(500);
                     } catch (InterruptedException ex) {
                         Logger.getLogger(ActivatedScreen.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                    System.out.print("Channel ara= " + Arrays.toString(chanelCount));
+                   // System.out.print("Channel ara= " + Arrays.toString(chanelCount));
                     for (int i = noofdev; i >= 1; i--) { //no of devices
 
                         try {
 
                             if (chanelCount[i] == 2) {
                                 readModbusRAS(i, 2);
+
                             } else {
                                 //   Thread.sleep(10);
                                 readModbusRAS(i, 1);
+
                             }
                             populateTableFix();
+                            jTableRelay.getColumnModel().getColumn(0).setCellRenderer(new CustomRenderer());
+                            jTableRelay.getColumnModel().getColumn(1).setCellRenderer(new CustomRenderer());
+                            jTableRelay.getColumnModel().getColumn(2).setCellRenderer(new CustomRenderer());
                         } catch (ModbusIOException | ModbusProtocolException | ModbusNumberException | InterruptedException ex) {
                             Logger.getLogger(ActivatedScreen.class.getName()).log(Level.SEVERE, null, ex);
                         }
@@ -893,18 +926,17 @@ for (int columnIndex = 0; columnIndex < jTableRelay.getColumnCount(); columnInde
             DefaultTableModel model = (DefaultTableModel) jTableReading.getModel();
             jTableReading.setRowHeight(30);
             model.setRowCount(0);
-            jTableReading = new JTable(model);
+            //  jTableReading = new JTable(model);
 
             DefaultTableModel Relaymodel = (DefaultTableModel) jTableRelay.getModel();
             jTableRelay.setRowHeight(30);
             // model.setRowCount(0);
-            jTableRelay = new JTable(Relaymodel);
-
+            Relaymodel.setRowCount(0);
             int i = 1;
             try {
                 while (rs.next()) {
                     dev_name[i] = rs.getString("dev_name");
-
+                    devID[i] = rs.getInt("dev_ID");
                     devType[i] = rs.getString("DevType");
                     c1p1[i] = rs.getString("c1para");
                     c1u1[i] = rs.getString("c1unit");
@@ -914,19 +946,20 @@ for (int columnIndex = 0; columnIndex < jTableRelay.getColumnCount(); columnInde
                     chanelCount[i] = rs.getInt("no_channel");
                     System.out.print("Channel Count arrray" + chanelCount[i] + ",");
                     // Thread.sleep(500);
-                    model.addRow(new Object[]{dev_name[i], devType[i], c1p1[i], " ", " ˚C"});
+                    model.addRow(new Object[]{dev_name[i], devID[i], devType[i], c1p1[i], " ", " ˚C"});
                     Relaymodel.addRow(new Object[]{"0", "0", "0"});
 
                     if ("LXT-330 Dual Channel".equals(devType[i])) {
-                        model.addRow(new Object[]{dev_name[i], devType[i], c2p2[i], " ", " ˚C"});
+                        model.addRow(new Object[]{dev_name[i], devID[i], devType[i], c2p2[i], " ", " ˚C"});
                         Relaymodel.addRow(new Object[]{"-", "-", "-"});
                     }
                     i++;
-                    
-       
 
                     //System.out.format("\n%s   %s   %s   %s   %s    %s",dev_name,devType,c1p1,c1u1,c2p2,c2u2);
                 }
+                jTableRelay.getColumnModel().getColumn(0).setCellRenderer(new CustomRenderer());
+                jTableRelay.getColumnModel().getColumn(1).setCellRenderer(new CustomRenderer());
+                jTableRelay.getColumnModel().getColumn(2).setCellRenderer(new CustomRenderer());
                 totalrowsintable = i;
                 //Read customer
 
@@ -958,42 +991,48 @@ for (int columnIndex = 0; columnIndex < jTableRelay.getColumnCount(); columnInde
 
     private void jButtonStopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonStopActionPerformed
         // TODO add your handling code here:
-        stopflag=1;
+        stopflag = 1;
     }//GEN-LAST:event_jButtonStopActionPerformed
 
-    private void jMenuItemAddDeviceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAddDeviceActionPerformed
-            
-            java.awt.EventQueue.invokeLater(new Runnable() {
-                @Override
-                public void run() {
-                    new MainForm().setVisible(true);
-                }
-            });
-    }//GEN-LAST:event_jMenuItemAddDeviceActionPerformed
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        stopflag = 0;
+        new ReadThread().start();        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+    private void jButtonGraphActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGraphActionPerformed
+        rowselected = jTableReading.getSelectedRow();
 
-        new setPort().setVisible(true);
+        String paraname = (String) jTableReading.getValueAt(jTableReading.getSelectedRow(), 3);
+        String dev_name = (String) jTableReading.getValueAt(jTableReading.getSelectedRow(), 2);
+        int did = (int) jTableReading.getValueAt(jTableReading.getSelectedRow(), 1);
+        JOptionPane.showMessageDialog(null, "Selected a row  " + rowselected + ":" + paraname + ":" + dev_name + ":" + did, "Error", JOptionPane.INFORMATION_MESSAGE);
 
+        new ThreadTwice(paraname, dev_name, did).start();
+
+
+    }//GEN-LAST:event_jButtonGraphActionPerformed
+    public static int rowselected;
+    private void jTableReadingMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableReadingMouseClicked
         // TODO add your handling code here:
+        //  jTableReading.setRowSelectionAllowed(true);
 
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
 
-    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        // TODO add your handling code here:
-        JdbcSQLiteConnection.shutdown();
-        
-    }//GEN-LAST:event_jMenuItem5ActionPerformed
+    }//GEN-LAST:event_jTableReadingMouseClicked
 
-    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-        // TODO add your handling code here:
-      java.awt.EventQueue.invokeLater(new Runnable() {
+    private void jButtonReportsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReportsActionPerformed
+
+        java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new UserRegistation().setVisible(true);
+                new ExportToCSV().setVisible(true);
             }
         });
-    }//GEN-LAST:event_jMenuItem6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonReportsActionPerformed
+
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
         // TODO add your handling code here:
@@ -1001,59 +1040,49 @@ for (int columnIndex = 0; columnIndex < jTableRelay.getColumnCount(); columnInde
         //Uri uri = U ri.fromFile(file);
         File file;
         //file = System()
-
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
-    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
-        System.exit(0);
-    }//GEN-LAST:event_jMenuItem8ActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        stopflag=0;
-        new ReadThread().start();        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void jButtonGraphActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGraphActionPerformed
-        
-                String data = (String) jTableRelay.getValueAt(jTableRelay.getSelectedRow(), 0);
-                System.out.println(data);
-        
-            
-                    
-        JOptionPane.showMessageDialog(null, "Selected a row  "+data, "Error",JOptionPane.INFORMATION_MESSAGE);            
-       
-        
-        
-    }//GEN-LAST:event_jButtonGraphActionPerformed
-public static int [] rowselected;
-    private void jTableReadingMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableReadingMouseClicked
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
         // TODO add your handling code here:
-        jTableReading.setRowSelectionAllowed(true);
-        
-        rowselected = jTableReading.getSelectedRows();
-         JOptionPane.showMessageDialog(null, "Selected a row  "+rowselected, "Error",JOptionPane.INFORMATION_MESSAGE);            
-    }//GEN-LAST:event_jTableReadingMouseClicked
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new UserRegistation().setVisible(true);
+            }
+        });
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
 
-    private void jButtonReportsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReportsActionPerformed
-        
-         java.awt.EventQueue.invokeLater(new Runnable() {
-                @Override
-                public void run() {
-                    new ExportToCSV().setVisible(true);
-                }
-            });
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonReportsActionPerformed
+        JdbcSQLiteConnection.shutdown();
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+
+        new setPort().setVisible(true);
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItemAddDeviceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAddDeviceActionPerformed
+
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new MainForm().setVisible(true);
+            }
+        });
+    }//GEN-LAST:event_jMenuItemAddDeviceActionPerformed
 
     public class MyCellRenderer extends javax.swing.table.DefaultTableCellRenderer {
-    public java.awt.Component getTableCellRendererComponent(javax.swing.JTable table, java.lang.Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-        java.awt.Component cellComponent = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-        
-        cellComponent.setBackground(Color.GREEN);
-        return cellComponent;
+
+        public java.awt.Component getTableCellRendererComponent(javax.swing.JTable table, java.lang.Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+            java.awt.Component cellComponent = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+
+            cellComponent.setBackground(Color.GREEN);
+            return cellComponent;
+        }
     }
-}
-    
 
     /**
      * @param args the command line arguments
